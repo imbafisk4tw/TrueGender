@@ -476,6 +476,54 @@
           "pattern": "\\bArbeitgebende\\b",
           "replacement": { "m": "Arbeitgeber", "w": "Arbeitgeberinnen", "g": "Arbeitgeber", "n": "Unternehmen" },
           "flags": "g"
+        },
+        {
+          "id": "suchende",
+          "description": "Suchende → Suchende/Interessenten",
+          "example": "Suchende",
+          "pattern": "\\bSuchende\\b",
+          "replacement": { "m": "Interessenten", "w": "Interessentinnen", "g": "Interessenten", "n": "Suchende" },
+          "flags": "g"
+        },
+        {
+          "id": "suchender",
+          "description": "Suchender → Interessent/Interessentin",
+          "example": "Suchender",
+          "pattern": "\\bSuchender\\b",
+          "replacement": { "m": "Interessent", "w": "Interessentin", "g": "Interessent", "n": "Suchende Person" },
+          "flags": "g"
+        },
+        {
+          "id": "bewerbende",
+          "description": "Bewerbende → Bewerber/Bewerberinnen",
+          "example": "Bewerbende",
+          "pattern": "\\bBewerbende\\b",
+          "replacement": { "m": "Bewerber", "w": "Bewerberinnen", "g": "Bewerber", "n": "Bewerbende" },
+          "flags": "g"
+        },
+        {
+          "id": "vermietende",
+          "description": "Vermietende → Vermieter/Vermieterinnen",
+          "example": "Vermietende",
+          "pattern": "\\bVermietende\\b",
+          "replacement": { "m": "Vermieter", "w": "Vermieterinnen", "g": "Vermieter", "n": "Vermietende" },
+          "flags": "g"
+        },
+        {
+          "id": "anbietende",
+          "description": "Anbietende → Anbieter/Anbieterinnen",
+          "example": "Anbietende",
+          "pattern": "\\bAnbietende\\b",
+          "replacement": { "m": "Anbieter", "w": "Anbieterinnen", "g": "Anbieter", "n": "Anbietende" },
+          "flags": "g"
+        },
+        {
+          "id": "nutzende",
+          "description": "Nutzende → Nutzer/Nutzerinnen",
+          "example": "Nutzende",
+          "pattern": "\\bNutzende\\b",
+          "replacement": { "m": "Nutzer", "w": "Nutzerinnen", "g": "Nutzer", "n": "Nutzende" },
+          "flags": "g"
         }
       ]
     },
