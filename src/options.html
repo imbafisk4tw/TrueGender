@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>TrueGender – Einstellungen</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f6f8;
+      color: #1a1a1a;
+      padding: 24px 32px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h1 { font-size: 24px; font-weight: 700; color: #2c3e50; margin-bottom: 20px; }
+
+    .card {
+      background: #fff; border-radius: 12px; padding: 20px 24px;
+      margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .card h2 { font-size: 16px; font-weight: 600; color: #333; margin-bottom: 8px; }
+    .card p { font-size: 13px; color: #888; margin-bottom: 12px; line-height: 1.5; }
+
+    /* ─── Profile selector ─── */
+    .profile-pills {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;
+    }
+    .profile-pill {
+      padding: 8px 16px; border: 2px solid #e0e0e0; border-radius: 8px;
+      background: #fafafa; cursor: pointer; font-size: 13px; color: #555; transition: all 0.15s;
+    }
+    .profile-pill:hover { border-color: #bbb; }
+    .profile-pill.active { border-color: #4A90D9; background: #EBF3FC; color: #2c3e50; font-weight: 600; }
+
+    /* ─── Toggles ─── */
+    .option-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid #f0f0f0;
+    }
+    .option-row:last-child { border-bottom: none; }
+    .option-info { flex: 1; }
+    .option-title { font-size: 14px; font-weight: 500; color: #333; }
+    .option-desc { font-size: 12px; color: #999; margin-top: 2px; }
+
+    .toggle { position: relative; width: 40px; height: 22px; cursor: pointer; flex-shrink: 0; margin-left: 16px; }
+    .toggle input { display: none; }
+    .toggle .slider { position: absolute; inset: 0; background: #ccc; border-radius: 11px; transition: background 0.2s; }
+    .toggle .slider::before {
+      content: ''; position: absolute; width: 18px; height: 18px; left: 2px; top: 2px;
+      background: #fff; border-radius: 50%; transition: transform 0.2s;
+    }
+    .toggle input:checked + .slider { background: #4A90D9; }
+    .toggle input:checked + .slider::before { transform: translateX(18px); }
+
+    /* ─── Profile editor table ─── */
+    .editor-controls {
+      display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap;
+    }
+    .editor-controls input {
+      flex: 1; min-width: 200px; padding: 6px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px;
+    }
+    .editor-controls input:focus { outline: none; border-color: #4A90D9; }
+
+    .rule-table {
+      width: 100%; border-collapse: collapse; font-size: 12px;
+    }
+    .rule-table th {
+      background: #f8f9fa; padding: 8px 6px; text-align: left; font-weight: 600;
+      color: #666; border-bottom: 2px solid #e8e8e8; position: sticky; top: 0; z-index: 1;
+    }
+    .rule-table td {
+      padding: 6px; border-bottom: 1px solid #f0f0f0; vertical-align: middle;
+    }
+    .rule-table tr:hover td { background: #fafbfc; }
+    .rule-table .cat-header td {
+      background: #f0f3f7; font-weight: 600; color: #4A90D9; padding: 8px 6px; font-size: 13px;
+    }
+
+    .rule-table .col-example { font-family: 'SF Mono', Consolas, monospace; color: #c44; white-space: nowrap; }
+    .rule-table .col-desc { color: #555; max-width: 200px; }
+    .rule-table .col-preset { color: #666; font-family: 'SF Mono', Consolas, monospace; font-size: 11px; }
+    .rule-table .col-custom input {
+      width: 100%; padding: 3px 6px; border: 1px solid #e0e0e0; border-radius: 4px;
+      font-size: 11px; font-family: 'SF Mono', Consolas, monospace;
+    }
+    .rule-table .col-custom input:focus { outline: none; border-color: #4A90D9; background: #EBF3FC; }
+    .rule-table .col-custom input.has-value { border-color: #4A90D9; background: #f0f6ff; }
+
+    .table-scroll {
+      max-height: 500px; overflow-y: auto; border: 1px solid #e8e8e8; border-radius: 8px;
+    }
+
+    /* ─── Import/Export ─── */
+    .ie-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .btn {
+      padding: 8px 16px; border: none; border-radius: 6px;
+      cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.15s;
+    }
+    .btn-primary { background: #4A90D9; color: #fff; }
+    .btn-primary:hover { background: #3a7bc8; }
+    .btn-secondary { background: #eee; color: #555; border: 1px solid #ddd; }
+    .btn-secondary:hover { background: #e0e0e0; }
+    .btn-danger { background: #e55; color: #fff; }
+    .btn-danger:hover { background: #d44; }
+    .btn-small { padding: 4px 10px; font-size: 12px; }
+
+    .file-input { display: none; }
+
+    /* ─── Domain lists ─── */
+    .domain-list { margin-top: 8px; }
+    .domain-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 0; font-size: 13px; font-family: 'SF Mono', Consolas, monospace; color: #555;
+    }
+    .domain-item button { padding: 2px 8px; font-size: 11px; border: 1px solid #ddd; border-radius: 4px; background: #fff; cursor: pointer; color: #c44; }
+    .domain-item button:hover { background: #fee; }
+
+    .add-domain { display: flex; gap: 8px; margin-top: 8px; }
+    .add-domain input { flex: 1; padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
+    .add-domain input:focus { outline: none; border-color: #4A90D9; }
+
+    /* ─── Custom rules ─── */
+    .custom-rule-form {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;
+    }
+    .custom-rule-form input {
+      padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px;
+    }
+    .custom-rule-form input:focus { outline: none; border-color: #4A90D9; }
+    .custom-rule-form .full-width { grid-column: 1 / -1; }
+
+    .custom-rules-list { margin-top: 12px; }
+    .custom-rule-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px; background: #f9f9f9; border-radius: 6px; margin-bottom: 6px; font-size: 12px;
+    }
+    .custom-rule-item code { font-family: 'SF Mono', Consolas, monospace; background: #eee; padding: 1px 4px; border-radius: 3px; }
+
+    /* ─── Stats ─── */
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px;
+    }
+    .stat-box {
+      text-align: center; padding: 16px; background: #f8f9fa; border-radius: 8px;
+    }
+    .stat-number { font-size: 24px; font-weight: 700; color: #4A90D9; }
+    .stat-label { font-size: 11px; color: #999; margin-top: 4px; }
+
+    .stats-list { margin-top: 8px; }
+    .stats-list-title { font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; }
+    .stats-item {
+      display: flex; justify-content: space-between; padding: 4px 0;
+      font-size: 12px; color: #666; border-bottom: 1px solid #f5f5f5;
+    }
+    .stats-item .count { font-weight: 600; color: #4A90D9; font-family: 'SF Mono', Consolas, monospace; }
+
+    /* ─── Reported words ─── */
+    .reported-list { margin-top: 8px; max-height: 200px; overflow-y: auto; }
+    .reported-item {
+      display: flex; justify-content: space-between; padding: 4px 0;
+      font-size: 12px; color: #666; border-bottom: 1px solid #f5f5f5;
+    }
+    .reported-word { font-weight: 600; color: #333; }
+    .reported-date { color: #aaa; font-size: 11px; }
+    .reported-context { font-size: 10px; color: #bbb; font-style: italic; }
+
+    .empty-state { font-size: 13px; color: #bbb; text-align: center; padding: 16px; }
+
+    .save-toast {
+      position: fixed; bottom: 24px; right: 24px; background: #2c3e50; color: #fff;
+      padding: 10px 20px; border-radius: 8px; font-size: 13px;
+      opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 1000;
+    }
+    .save-toast.visible { opacity: 1; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <h1>TrueGender – Einstellungen</h1>
+
+  <!-- Active profile -->
+  <div class="card">
+    <h2>Aktives Profil</h2>
+    <p>Wähle, wie gegenderte Begriffe ersetzt werden sollen.</p>
+    <div class="profile-pills" id="profilePills">
+      <button class="profile-pill" data-gender="m">Männlich</button>
+      <button class="profile-pill" data-gender="w">Weiblich</button>
+      <button class="profile-pill active" data-gender="g">Generisches Maskulinum</button>
+      <button class="profile-pill" data-gender="n">Neutral</button>
+      <button class="profile-pill" data-gender="c">Custom</button>
+    </div>
+  </div>
+
+  <!-- Category toggles -->
+  <div class="card">
+    <h2>Regelkategorien</h2>
+    <p>Welche Arten von Ersetzungen sollen aktiv sein?</p>
+    <div id="categoryToggles"></div>
+  </div>
+
+  <!-- Profile editor -->
+  <div class="card">
+    <h2>Profil-Editor</h2>
+    <p>Alle Regeln auf einen Blick. Im Custom-Profil kannst du pro Regel deine eigene Ersetzung definieren.</p>
+    <div class="editor-controls">
+      <input type="text" id="ruleSearch" placeholder="Regeln durchsuchen…">
+    </div>
+    <div class="table-scroll">
+      <table class="rule-table" id="ruleTable">
+        <thead>
+          <tr>
+            <th>Beispiel</th>
+            <th>Beschreibung</th>
+            <th>Männl.</th>
+            <th>Weibl.</th>
+            <th>Generisch</th>
+            <th>Neutral</th>
+            <th style="min-width: 120px;">Custom</th>
+          </tr>
+        </thead>
+        <tbody id="ruleTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Import / Export -->
+  <div class="card">
+    <h2>Profil Import / Export</h2>
+    <p>Teile dein Custom-Profil mit anderen oder importiere ein bestehendes Profil.</p>
+    <div class="ie-buttons">
+      <button class="btn btn-primary" id="btnExport">Profil exportieren</button>
+      <button class="btn btn-secondary" id="btnImport">Profil importieren</button>
+      <input type="file" id="importFile" class="file-input" accept=".json">
+      <button class="btn btn-danger btn-small" id="btnResetCustom">Custom zurücksetzen</button>
+    </div>
+    <div id="importStatus" style="margin-top: 8px; font-size: 12px;"></div>
+  </div>
+
+  <!-- Domain lists -->
+  <div class="two-col">
+    <div class="card">
+      <h2>Blockierte Seiten</h2>
+      <p>TrueGender wird auf diesen Domains nicht aktiv.</p>
+      <div class="domain-list" id="blacklistContainer"></div>
+      <div class="add-domain">
+        <input type="text" id="blacklistInput" placeholder="beispiel.de">
+        <button class="btn btn-primary btn-small" id="addBlacklist">+</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Erlaubte Seiten</h2>
+      <p>Wenn gesetzt: NUR auf diesen Domains aktiv.</p>
+      <div class="domain-list" id="whitelistContainer"></div>
+      <div class="add-domain">
+        <input type="text" id="whitelistInput" placeholder="beispiel.de">
+        <button class="btn btn-primary btn-small" id="addWhitelist">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom regex rules -->
+  <div class="card">
+    <h2>Eigene Regex-Regeln</h2>
+    <p>Zusätzliche Ersetzungsregeln mit eigenem Regex-Pattern.</p>
+    <div class="custom-rule-form">
+      <input type="text" id="rulePattern" placeholder="Pattern (Regex)">
+      <input type="text" id="ruleDesc" placeholder="Beschreibung">
+      <input type="text" id="ruleMale" placeholder="Männlich">
+      <input type="text" id="ruleFemale" placeholder="Weiblich">
+      <input type="text" id="ruleGeneric" placeholder="Generisch">
+      <input type="text" id="ruleNeutral" placeholder="Neutral">
+      <button class="btn btn-primary full-width" id="addRule">Regel hinzufügen</button>
+    </div>
+    <div class="custom-rules-list" id="customRulesContainer"></div>
+  </div>
+
+  <!-- Statistics -->
+  <div class="card">
+    <h2>Statistiken</h2>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-number" id="statTotal">0</div>
+        <div class="stat-label">Gesamt-Ersetzungen</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" id="statRules">0</div>
+        <div class="stat-label">Aktive Regeln</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" id="statDomains">0</div>
+        <div class="stat-label">Betroffene Seiten</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="stats-list-title">Top 10 Regeln</div>
+        <div class="stats-list" id="topRules"></div>
+      </div>
+      <div>
+        <div class="stats-list-title">Top 5 Domains</div>
+        <div class="stats-list" id="topDomains"></div>
+      </div>
+    </div>
+    <div style="margin-top: 12px;">
+      <button class="btn btn-danger btn-small" id="btnResetStats">Statistiken zurücksetzen</button>
+    </div>
+  </div>
+
+  <!-- Reported words -->
+  <div class="card">
+    <h2>Gemeldete Wörter</h2>
+    <div class="reported-list" id="reportedContainer"></div>
+    <div style="margin-top: 8px;">
+      <button class="btn btn-danger btn-small" id="clearReported">Alle löschen</button>
+    </div>
+  </div>
+
+  <div class="save-toast" id="saveToast">Gespeichert</div>
+
+  <script src="options.js"></script>
+</body>
+</html>

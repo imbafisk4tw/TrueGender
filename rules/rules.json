@@ -1,0 +1,497 @@
+{
+  "meta": {
+    "version": "2.0.0",
+    "description": "Ersetzungsregeln für gegenderte Schreibweisen → korrektes Deutsch",
+    "modes": {
+      "m": "Männliche Form",
+      "w": "Weibliche Form",
+      "g": "Generisches Maskulinum",
+      "n": "Geschlechtsneutral",
+      "c": "Custom-Profil"
+    }
+  },
+  "rules": {
+    "genderStar": {
+      "description": "Genderstern, Doppelpunkt, Unterstrich — Pluralformen auf -innen",
+      "enabled": true,
+      "rules": [
+        {
+          "id": "plural-innen-standard",
+          "description": "Wörter auf *innen/:innen/_innen (z.B. Kund*innen → Kunden/Kundinnen)",
+          "example": "Kund:innen",
+          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]innen\\b",
+          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "flags": "g"
+        },
+        {
+          "id": "plural-innen-case-umlaut",
+          "description": "Ärzt*innen → Ärzte/Ärztinnen",
+          "example": "Ärzt:innen",
+          "pattern": "\\b(Ärzt)[*:_]innen\\b",
+          "replacement": { "m": "Ärzte", "w": "Ärztinnen", "g": "Ärzte", "n": "Ärzteschaft" },
+          "flags": "g"
+        },
+        {
+          "id": "plural-innen-aerzte-lc",
+          "description": "ärzt*innen (lowercase)",
+          "example": "ärzt:innen",
+          "pattern": "\\b(ärzt)[*:_]innen\\b",
+          "replacement": { "m": "ärzte", "w": "ärztinnen", "g": "ärzte", "n": "ärzteschaft" },
+          "flags": "g"
+        },
+        {
+          "id": "plural-innen-anwaelte",
+          "description": "Anwält*innen → Anwälte/Anwältinnen",
+          "example": "Anwält:innen",
+          "pattern": "\\b(Anwält)[*:_]innen\\b",
+          "replacement": { "m": "Anwälte", "w": "Anwältinnen", "g": "Anwälte", "n": "Anwaltschaft" },
+          "flags": "g"
+        },
+        {
+          "id": "plural-innen-koechinnen",
+          "description": "Köch*innen → Köche/Köchinnen",
+          "example": "Köch:innen",
+          "pattern": "\\b(Köch)[*:_]innen\\b",
+          "replacement": { "m": "Köche", "w": "Köchinnen", "g": "Köche", "n": "Kochpersonal" },
+          "flags": "g"
+        },
+        {
+          "id": "plural-innen-lowercase",
+          "description": "Kleinschreibung: wörter auf *innen/:innen/_innen",
+          "example": "lehrer:innen",
+          "pattern": "\\b([a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]innen\\b",
+          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "flags": "g"
+        },
+        {
+          "id": "singular-in-standard",
+          "description": "Singular: Kund*in/:in/_in → Kunde/Kundin",
+          "example": "Kund:in",
+          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]in\\b",
+          "replacement": { "m": "$1e", "w": "$1in", "g": "$1e", "n": "$1e" },
+          "flags": "g"
+        },
+        {
+          "id": "singular-in-no-e",
+          "description": "Singular ohne -e: Lehrer*in → Lehrer/Lehrerin",
+          "example": "Lehrer:in",
+          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]*(?:er|ler|ner|ger|ber|der|fer|ter|wer|mer))[*:_]in\\b",
+          "replacement": { "m": "$1", "w": "$1in", "g": "$1", "n": "$1" },
+          "flags": "g"
+        },
+        {
+          "id": "singular-in-lowercase",
+          "description": "Singular Kleinschreibung",
+          "example": "lehrer:in",
+          "pattern": "\\b([a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]in\\b",
+          "replacement": { "m": "$1e", "w": "$1in", "g": "$1e", "n": "$1e" },
+          "flags": "g"
+        }
+      ]
+    },
+    "binnenI": {
+      "description": "Binnen-I Formen (MitarbeiterInnen, KollegInnen)",
+      "enabled": true,
+      "rules": [
+        {
+          "id": "binnen-i-plural",
+          "description": "MitarbeiterInnen → Mitarbeiter/Mitarbeiterinnen",
+          "example": "MitarbeiterInnen",
+          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg))Innen\\b",
+          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "flags": "g"
+        },
+        {
+          "id": "binnen-i-singular",
+          "description": "MitarbeiterIn → Mitarbeiter/Mitarbeiterin",
+          "example": "MitarbeiterIn",
+          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg))In\\b",
+          "replacement": { "m": "$1", "w": "$1in", "g": "$1", "n": "$1" },
+          "flags": "g"
+        }
+      ]
+    },
+    "specificWords": {
+      "description": "Spezifische Wörter die nicht per generischem Regex abgedeckt sind",
+      "enabled": true,
+      "rules": [
+        {
+          "id": "expert-innen",
+          "description": "Expert*innen → Experten/Expertinnen",
+          "example": "Expert:innen",
+          "pattern": "\\bExpert[*:_]innen\\b",
+          "replacement": { "m": "Experten", "w": "Expertinnen", "g": "Experten", "n": "Fachleute" },
+          "flags": "g"
+        },
+        {
+          "id": "expert-in",
+          "description": "Expert*in → Experte/Expertin",
+          "example": "Expert:in",
+          "pattern": "\\bExpert[*:_]in\\b",
+          "replacement": { "m": "Experte", "w": "Expertin", "g": "Experte", "n": "Fachperson" },
+          "flags": "g"
+        },
+        {
+          "id": "kolleg-innen",
+          "description": "Kolleg*innen → Kollegen/Kolleginnen",
+          "example": "Kolleg:innen",
+          "pattern": "\\bKolleg[*:_]innen\\b",
+          "replacement": { "m": "Kollegen", "w": "Kolleginnen", "g": "Kollegen", "n": "Kollegium" },
+          "flags": "g"
+        },
+        {
+          "id": "kolleg-in",
+          "description": "Kolleg*in → Kollege/Kollegin",
+          "example": "Kolleg:in",
+          "pattern": "\\bKolleg[*:_]in\\b",
+          "replacement": { "m": "Kollege", "w": "Kollegin", "g": "Kollege", "n": "Kollegiumsmitglied" },
+          "flags": "g"
+        },
+        {
+          "id": "buerger-innen",
+          "description": "Bürger*innen → Bürger/Bürgerinnen",
+          "example": "Bürger:innen",
+          "pattern": "\\bBürger[*:_]innen\\b",
+          "replacement": { "m": "Bürger", "w": "Bürgerinnen", "g": "Bürger", "n": "Bevölkerung" },
+          "flags": "g"
+        },
+        {
+          "id": "freund-innen",
+          "description": "Freund*innen → Freunde/Freundinnen",
+          "example": "Freund:innen",
+          "pattern": "\\bFreund[*:_]innen\\b",
+          "replacement": { "m": "Freunde", "w": "Freundinnen", "g": "Freunde", "n": "Freundeskreis" },
+          "flags": "g"
+        },
+        {
+          "id": "kund-innen",
+          "description": "Kund*innen → Kunden/Kundinnen",
+          "example": "Kund:innen",
+          "pattern": "\\bKund[*:_]innen\\b",
+          "replacement": { "m": "Kunden", "w": "Kundinnen", "g": "Kunden", "n": "Kundschaft" },
+          "flags": "g"
+        },
+        {
+          "id": "kund-in",
+          "description": "Kund*in → Kunde/Kundin",
+          "example": "Kund:in",
+          "pattern": "\\bKund[*:_]in\\b",
+          "replacement": { "m": "Kunde", "w": "Kundin", "g": "Kunde", "n": "Kundschaft" },
+          "flags": "g"
+        },
+        {
+          "id": "patient-innen",
+          "description": "Patient*innen → Patienten/Patientinnen",
+          "example": "Patient:innen",
+          "pattern": "\\bPatient[*:_]innen\\b",
+          "replacement": { "m": "Patienten", "w": "Patientinnen", "g": "Patienten", "n": "Erkrankte" },
+          "flags": "g"
+        },
+        {
+          "id": "patient-in",
+          "description": "Patient*in → Patient/Patientin",
+          "example": "Patient:in",
+          "pattern": "\\bPatient[*:_]in\\b",
+          "replacement": { "m": "Patient", "w": "Patientin", "g": "Patient", "n": "Erkrankte Person" },
+          "flags": "g"
+        },
+        {
+          "id": "autor-innen",
+          "description": "Autor*innen → Autoren/Autorinnen",
+          "example": "Autor:innen",
+          "pattern": "\\bAutor[*:_]innen\\b",
+          "replacement": { "m": "Autoren", "w": "Autorinnen", "g": "Autoren", "n": "Verfassende" },
+          "flags": "g"
+        },
+        {
+          "id": "partner-innen",
+          "description": "Partner*innen → Partner/Partnerinnen",
+          "example": "Partner:innen",
+          "pattern": "\\bPartner[*:_]innen\\b",
+          "replacement": { "m": "Partner", "w": "Partnerinnen", "g": "Partner", "n": "Partnerschaft" },
+          "flags": "g"
+        },
+        {
+          "id": "chef-innen",
+          "description": "Chef*innen → Chefs/Chefinnen",
+          "example": "Chef:innen",
+          "pattern": "\\bChef[*:_]innen\\b",
+          "replacement": { "m": "Chefs", "w": "Chefinnen", "g": "Chefs", "n": "Vorgesetzte" },
+          "flags": "g"
+        }
+      ]
+    },
+    "articles": {
+      "description": "Gegenderte Artikel und Pronomen",
+      "enabled": true,
+      "rules": [
+        {
+          "id": "der-die-star",
+          "description": "der*die / der:die → der/die",
+          "example": "der:die",
+          "pattern": "\\bder[*:_]die\\b",
+          "replacement": { "m": "der", "w": "die", "g": "der", "n": "die/der" },
+          "flags": "gi"
+        },
+        {
+          "id": "die-der-star",
+          "description": "die*der → der/die",
+          "example": "die:der",
+          "pattern": "\\bdie[*:_]der\\b",
+          "replacement": { "m": "der", "w": "die", "g": "der", "n": "die/der" },
+          "flags": "gi"
+        },
+        {
+          "id": "ein-e-star",
+          "description": "ein*e / ein:e → ein/eine",
+          "example": "ein:e",
+          "pattern": "\\bein[*:_]e\\b",
+          "replacement": { "m": "ein", "w": "eine", "g": "ein", "n": "eine" },
+          "flags": "gi"
+        },
+        {
+          "id": "jede-r-star",
+          "description": "jede*r / jede:r → jeder/jede",
+          "example": "jede:r",
+          "pattern": "\\bjede[*:_]r\\b",
+          "replacement": { "m": "jeder", "w": "jede", "g": "jeder", "n": "alle" },
+          "flags": "gi"
+        },
+        {
+          "id": "jeder-jede-star",
+          "description": "jeder*jede → jeder/jede",
+          "example": "jeder:jede",
+          "pattern": "\\bjeder[*:_]jede\\b",
+          "replacement": { "m": "jeder", "w": "jede", "g": "jeder", "n": "alle" },
+          "flags": "gi"
+        },
+        {
+          "id": "keine-r",
+          "description": "keine*r / keine:r → keiner/keine",
+          "example": "keine:r",
+          "pattern": "\\bkeine[*:_]r\\b",
+          "replacement": { "m": "keiner", "w": "keine", "g": "keiner", "n": "niemand" },
+          "flags": "gi"
+        },
+        {
+          "id": "seine-ihre",
+          "description": "seine*ihre → seine/ihre",
+          "example": "seine:ihre",
+          "pattern": "\\bseine?[*:_]ihre?\\b",
+          "replacement": { "m": "seine", "w": "ihre", "g": "seine", "n": "deren" },
+          "flags": "gi"
+        },
+        {
+          "id": "er-sie-star",
+          "description": "er*sie → er/sie",
+          "example": "er:sie",
+          "pattern": "\\ber[*:_]sie\\b",
+          "replacement": { "m": "er", "w": "sie", "g": "er", "n": "die Person" },
+          "flags": "gi"
+        },
+        {
+          "id": "ihm-ihr-star",
+          "description": "ihm*ihr → ihm/ihr",
+          "example": "ihm:ihr",
+          "pattern": "\\bihm[*:_]ihr\\b",
+          "replacement": { "m": "ihm", "w": "ihr", "g": "ihm", "n": "der Person" },
+          "flags": "gi"
+        },
+        {
+          "id": "dem-der-star",
+          "description": "dem*der (Dativ) → dem/der",
+          "example": "dem:der",
+          "pattern": "\\bdem[*:_]der\\b",
+          "replacement": { "m": "dem", "w": "der", "g": "dem", "n": "dem/der" },
+          "flags": "gi"
+        },
+        {
+          "id": "den-die-star",
+          "description": "den*die (Akkusativ) → den/die",
+          "example": "den:die",
+          "pattern": "\\bden[*:_]die\\b",
+          "replacement": { "m": "den", "w": "die", "g": "den", "n": "den/die" },
+          "flags": "gi"
+        }
+      ]
+    },
+    "doppelformen": {
+      "description": "Doppelformen wie 'Bürgerinnen und Bürger'",
+      "enabled": true,
+      "rules": [
+        {
+          "id": "buergerinnen-und-buerger",
+          "description": "Bürgerinnen und Bürger → Bürger/Bürgerinnen",
+          "example": "Bürgerinnen und Bürger",
+          "pattern": "\\bBürgerinnen und Bürger\\b",
+          "replacement": { "m": "Bürger", "w": "Bürgerinnen", "g": "Bürger", "n": "Bevölkerung" },
+          "flags": "g"
+        },
+        {
+          "id": "buerger-und-buergerinnen",
+          "description": "Bürger und Bürgerinnen → Bürger/Bürgerinnen",
+          "example": "Bürger und Bürgerinnen",
+          "pattern": "\\bBürger und Bürgerinnen\\b",
+          "replacement": { "m": "Bürger", "w": "Bürgerinnen", "g": "Bürger", "n": "Bevölkerung" },
+          "flags": "g"
+        },
+        {
+          "id": "schuelerinnen-und-schueler",
+          "description": "Schülerinnen und Schüler → Schüler/Schülerinnen",
+          "example": "Schülerinnen und Schüler",
+          "pattern": "\\bSchülerinnen und Schüler\\b",
+          "replacement": { "m": "Schüler", "w": "Schülerinnen", "g": "Schüler", "n": "Lernende" },
+          "flags": "g"
+        },
+        {
+          "id": "aerztinnen-und-aerzte",
+          "description": "Ärztinnen und Ärzte → Ärzte/Ärztinnen",
+          "example": "Ärztinnen und Ärzte",
+          "pattern": "\\bÄrztinnen und Ärzte\\b",
+          "replacement": { "m": "Ärzte", "w": "Ärztinnen", "g": "Ärzte", "n": "Ärzteschaft" },
+          "flags": "g"
+        },
+        {
+          "id": "kolleginnen-und-kollegen",
+          "description": "Kolleginnen und Kollegen → Kollegen/Kolleginnen",
+          "example": "Kolleginnen und Kollegen",
+          "pattern": "\\bKolleginnen und Kollegen\\b",
+          "replacement": { "m": "Kollegen", "w": "Kolleginnen", "g": "Kollegen", "n": "Kollegium" },
+          "flags": "g"
+        },
+        {
+          "id": "freundinnen-und-freunde",
+          "description": "Freundinnen und Freunde → Freunde/Freundinnen",
+          "example": "Freundinnen und Freunde",
+          "pattern": "\\bFreundinnen und Freunde\\b",
+          "replacement": { "m": "Freunde", "w": "Freundinnen", "g": "Freunde", "n": "Freundeskreis" },
+          "flags": "g"
+        },
+        {
+          "id": "lehrerinnen-und-lehrer",
+          "description": "Lehrerinnen und Lehrer → Lehrer/Lehrerinnen",
+          "example": "Lehrerinnen und Lehrer",
+          "pattern": "\\bLehrerinnen und Lehrer\\b",
+          "replacement": { "m": "Lehrer", "w": "Lehrerinnen", "g": "Lehrer", "n": "Lehrkräfte" },
+          "flags": "g"
+        },
+        {
+          "id": "doppel-innen-und",
+          "description": "Xinnen und X → X (m) oder Xinnen (w)",
+          "example": "Partnerinnen und Partner",
+          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|ent|ant|ist|at|ekt|eur|ör|ier|ar))innen und \\1\\b",
+          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "flags": "g"
+        },
+        {
+          "id": "doppel-und-innen",
+          "description": "X und Xinnen → X (m) oder Xinnen (w)",
+          "example": "Partner und Partnerinnen",
+          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|ent|ant|ist|at|ekt|eur|ör|ier|ar)) und \\1innen\\b",
+          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "flags": "g"
+        },
+        {
+          "id": "doppel-er-sie",
+          "description": "er oder sie / sie oder er → er/sie",
+          "example": "er oder sie",
+          "pattern": "\\b(er|sie) oder (sie|er)\\b",
+          "replacement": { "m": "er", "w": "sie", "g": "er", "n": "die Person" },
+          "flags": "gi"
+        }
+      ]
+    },
+    "partizip": {
+      "description": "Partizip-Konstruktionen (Studierende → Studenten etc.) — optional",
+      "enabled": false,
+      "rules": [
+        {
+          "id": "studierende",
+          "description": "Studierende → Studenten/Studentinnen",
+          "example": "Studierende",
+          "pattern": "\\bStudierende\\b",
+          "replacement": { "m": "Studenten", "w": "Studentinnen", "g": "Studenten", "n": "Studierende" },
+          "flags": "g"
+        },
+        {
+          "id": "studierender",
+          "description": "Studierender → Student/Studentin",
+          "example": "Studierender",
+          "pattern": "\\bStudierender\\b",
+          "replacement": { "m": "Student", "w": "Studentin", "g": "Student", "n": "Studierende Person" },
+          "flags": "g"
+        },
+        {
+          "id": "lehrende",
+          "description": "Lehrende → Lehrer/Lehrerinnen",
+          "example": "Lehrende",
+          "pattern": "\\bLehrende\\b",
+          "replacement": { "m": "Lehrer", "w": "Lehrerinnen", "g": "Lehrer", "n": "Lehrkräfte" },
+          "flags": "g"
+        },
+        {
+          "id": "mitarbeitende",
+          "description": "Mitarbeitende → Mitarbeiter/Mitarbeiterinnen",
+          "example": "Mitarbeitende",
+          "pattern": "\\bMitarbeitende\\b",
+          "replacement": { "m": "Mitarbeiter", "w": "Mitarbeiterinnen", "g": "Mitarbeiter", "n": "Belegschaft" },
+          "flags": "g"
+        },
+        {
+          "id": "forschende",
+          "description": "Forschende → Forscher/Forscherinnen",
+          "example": "Forschende",
+          "pattern": "\\bForschende\\b",
+          "replacement": { "m": "Forscher", "w": "Forscherinnen", "g": "Forscher", "n": "Forschende" },
+          "flags": "g"
+        },
+        {
+          "id": "teilnehmende",
+          "description": "Teilnehmende → Teilnehmer/Teilnehmerinnen",
+          "example": "Teilnehmende",
+          "pattern": "\\bTeilnehmende\\b",
+          "replacement": { "m": "Teilnehmer", "w": "Teilnehmerinnen", "g": "Teilnehmer", "n": "Teilnehmende" },
+          "flags": "g"
+        },
+        {
+          "id": "arbeitnehmende",
+          "description": "Arbeitnehmende → Arbeitnehmer/Arbeitnehmerinnen",
+          "example": "Arbeitnehmende",
+          "pattern": "\\bArbeitnehmende\\b",
+          "replacement": { "m": "Arbeitnehmer", "w": "Arbeitnehmerinnen", "g": "Arbeitnehmer", "n": "Beschäftigte" },
+          "flags": "g"
+        },
+        {
+          "id": "arbeitgebende",
+          "description": "Arbeitgebende → Arbeitgeber/Arbeitgeberinnen",
+          "example": "Arbeitgebende",
+          "pattern": "\\bArbeitgebende\\b",
+          "replacement": { "m": "Arbeitgeber", "w": "Arbeitgeberinnen", "g": "Arbeitgeber", "n": "Unternehmen" },
+          "flags": "g"
+        }
+      ]
+    },
+    "slashForms": {
+      "description": "Schrägstrich-Formen (Lehrer/innen, Schüler/-innen)",
+      "enabled": true,
+      "rules": [
+        {
+          "id": "slash-innen",
+          "description": "Lehrer/innen, Lehrer/-innen → Lehrer/Lehrerinnen",
+          "example": "Lehrer/innen",
+          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ier|ar))\\/?-?innen\\b",
+          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "flags": "g"
+        },
+        {
+          "id": "slash-in",
+          "description": "Lehrer/in, Lehrer/-in → Lehrer/Lehrerin",
+          "example": "Lehrer/-in",
+          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ier|ar))\\/?-?in\\b",
+          "replacement": { "m": "$1", "w": "$1in", "g": "$1", "n": "$1" },
+          "flags": "g"
+        }
+      ]
+    }
+  }
+}
