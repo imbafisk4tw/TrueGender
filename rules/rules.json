@@ -64,14 +64,6 @@
           "flags": "g"
         },
         {
-          "id": "singular-in-standard",
-          "description": "Singular: Kund*in/:in/_in → Kunde/Kundin",
-          "example": "Kund:in",
-          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]in\\b",
-          "replacement": { "m": "$1e", "w": "$1in", "g": "$1e", "n": "$1e" },
-          "flags": "g"
-        },
-        {
           "id": "singular-in-no-e",
           "description": "Singular ohne -e: Lehrer*in → Lehrer/Lehrerin",
           "example": "Lehrer:in",
@@ -80,9 +72,25 @@
           "flags": "g"
         },
         {
+          "id": "singular-in-standard",
+          "description": "Singular: Kund*in/:in/_in → Kunde/Kundin",
+          "example": "Kund:in",
+          "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]in\\b",
+          "replacement": { "m": "$1e", "w": "$1in", "g": "$1e", "n": "$1e" },
+          "flags": "g"
+        },
+        {
+          "id": "singular-in-lowercase-no-e",
+          "description": "Singular Kleinschreibung ohne -e: lehrer:in → lehrer/lehrerin",
+          "example": "lehrer:in",
+          "pattern": "\\b([a-zäöüß]+(?:er|ler|ner|ger|ber|der|fer|ter|wer|mer))[*:_]in\\b",
+          "replacement": { "m": "$1", "w": "$1in", "g": "$1", "n": "$1" },
+          "flags": "g"
+        },
+        {
           "id": "singular-in-lowercase",
           "description": "Singular Kleinschreibung",
-          "example": "lehrer:in",
+          "example": "expert:in",
           "pattern": "\\b([a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]in\\b",
           "replacement": { "m": "$1e", "w": "$1in", "g": "$1e", "n": "$1e" },
           "flags": "g"
