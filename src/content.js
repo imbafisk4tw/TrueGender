@@ -15,7 +15,7 @@
   let settings = {
     enabled: true,
     gender: 'g',        // m | w | g | n | c
-    partizip: false,
+    partizip: true,
     doppelformen: true,
     categories: {},      // per-category overrides
     whitelist: [],
@@ -356,7 +356,7 @@
     const stored = await chrome.storage.sync.get({
       enabled: true,
       gender: 'g',
-      partizip: false,
+      partizip: true,
       doppelformen: true,
       categories: {},
       whitelist: [],

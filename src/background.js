@@ -10,7 +10,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     await chrome.storage.sync.set({
       enabled: true,
       gender: 'g',
-      partizip: false,
+      partizip: true,
       doppelformen: true,
       categories: {},
       whitelist: [],

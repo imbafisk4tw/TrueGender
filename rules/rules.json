@@ -410,8 +410,8 @@
       ]
     },
     "partizip": {
-      "description": "Partizip-Konstruktionen (Studierende → Studenten etc.) — optional",
-      "enabled": false,
+      "description": "Partizip-Konstruktionen (Studierende → Studenten etc.)",
+      "enabled": true,
       "rules": [
         {
           "id": "studierende",
