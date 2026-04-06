@@ -9,7 +9,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
   if (details.reason === 'install') {
     await chrome.storage.sync.set({
       enabled: true,
-      gender: 'g',
+      gender: 'b',
       partizip: true,
       doppelformen: true,
       categories: {},
@@ -42,6 +42,8 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     const defaults = {};
     if (sync.categories === undefined) defaults.categories = {};
     if (sync.customReplacements === undefined) defaults.customReplacements = {};
+    // Migrate: 'g' (generisches Maskulinum) → 'b' (beide Formen)
+    if (sync.gender === 'g') defaults.gender = 'b';
     if (Object.keys(defaults).length > 0) {
       await chrome.storage.sync.set(defaults);
     }

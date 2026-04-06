@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const settings = await chrome.storage.sync.get({
     enabled: true,
-    gender: 'g',
+    gender: 'b',
     whitelist: [],
     blacklist: [],
   });

@@ -190,9 +190,9 @@
     <h2>Aktives Profil</h2>
     <p>Wähle, wie gegenderte Begriffe ersetzt werden sollen.</p>
     <div class="profile-pills" id="profilePills">
+      <button class="profile-pill active" data-gender="b">Beide</button>
       <button class="profile-pill" data-gender="m">Männlich</button>
       <button class="profile-pill" data-gender="w">Weiblich</button>
-      <button class="profile-pill active" data-gender="g">Generisches Maskulinum</button>
       <button class="profile-pill" data-gender="n">Neutral</button>
       <button class="profile-pill" data-gender="c">Custom</button>
     </div>
@@ -218,9 +218,9 @@
           <tr>
             <th>Beispiel</th>
             <th>Beschreibung</th>
+            <th>Beide</th>
             <th>Männl.</th>
             <th>Weibl.</th>
-            <th>Generisch</th>
             <th>Neutral</th>
             <th style="min-width: 120px;">Custom</th>
           </tr>
@@ -272,9 +272,9 @@
     <div class="custom-rule-form">
       <input type="text" id="rulePattern" placeholder="Pattern (Regex)">
       <input type="text" id="ruleDesc" placeholder="Beschreibung">
+      <input type="text" id="ruleBoth" placeholder="Beide">
       <input type="text" id="ruleMale" placeholder="Männlich">
       <input type="text" id="ruleFemale" placeholder="Weiblich">
-      <input type="text" id="ruleGeneric" placeholder="Generisch">
       <input type="text" id="ruleNeutral" placeholder="Neutral">
       <button class="btn btn-primary full-width" id="addRule">Regel hinzufügen</button>
     </div>

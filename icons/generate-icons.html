@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>Icon Generator</title></head>
+<body>
+<p>Right-click each canvas → Save as PNG</p>
+<canvas id="c16" width="16" height="16"></canvas>
+<canvas id="c48" width="48" height="48"></canvas>
+<canvas id="c128" width="128" height="128"></canvas>
+<script>
+function drawIcon(canvas) {
+  const s = canvas.width;
+  const ctx = canvas.getContext('2d');
+
+  // Background circle
+  ctx.beginPath();
+  ctx.arc(s/2, s/2, s/2 - 1, 0, Math.PI*2);
+  ctx.fillStyle = '#4A90D9';
+  ctx.fill();
+
+  // "TG" text
+  ctx.fillStyle = '#fff';
+  ctx.font = `bold ${s * 0.45}px -apple-system, sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('TG', s/2, s/2 + 1);
+}
+
+drawIcon(document.getElementById('c16'));
+drawIcon(document.getElementById('c48'));
+drawIcon(document.getElementById('c128'));
+</script>
+</body>
+</html>

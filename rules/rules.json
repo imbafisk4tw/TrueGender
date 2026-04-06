@@ -1,11 +1,11 @@
 {
   "meta": {
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "Ersetzungsregeln für gegenderte Schreibweisen → korrektes Deutsch",
     "modes": {
+      "b": "Beide Formen",
       "m": "Männliche Form",
       "w": "Weibliche Form",
-      "g": "Generisches Maskulinum",
       "n": "Geschlechtsneutral",
       "c": "Custom-Profil"
     }
@@ -20,7 +20,7 @@
           "description": "Wörter auf *innen/:innen/_innen (z.B. Kund*innen → Kunden/Kundinnen)",
           "example": "Kund:innen",
           "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]innen\\b",
-          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "replacement": { "b": "$1 und $1innen", "m": "$1", "w": "$1innen", "n": "$1" },
           "flags": "g"
         },
         {
@@ -28,7 +28,7 @@
           "description": "Ärzt*innen → Ärzte/Ärztinnen",
           "example": "Ärzt:innen",
           "pattern": "\\b(Ärzt)[*:_]innen\\b",
-          "replacement": { "m": "Ärzte", "w": "Ärztinnen", "g": "Ärzte", "n": "Ärzteschaft" },
+          "replacement": { "b": "Ärzte und Ärztinnen", "m": "Ärzte", "w": "Ärztinnen", "n": "Ärzteschaft" },
           "flags": "g"
         },
         {
@@ -36,7 +36,7 @@
           "description": "ärzt*innen (lowercase)",
           "example": "ärzt:innen",
           "pattern": "\\b(ärzt)[*:_]innen\\b",
-          "replacement": { "m": "ärzte", "w": "ärztinnen", "g": "ärzte", "n": "ärzteschaft" },
+          "replacement": { "b": "ärzte und ärztinnen", "m": "ärzte", "w": "ärztinnen", "n": "ärzteschaft" },
           "flags": "g"
         },
         {
@@ -44,7 +44,7 @@
           "description": "Anwält*innen → Anwälte/Anwältinnen",
           "example": "Anwält:innen",
           "pattern": "\\b(Anwält)[*:_]innen\\b",
-          "replacement": { "m": "Anwälte", "w": "Anwältinnen", "g": "Anwälte", "n": "Anwaltschaft" },
+          "replacement": { "b": "Anwälte und Anwältinnen", "m": "Anwälte", "w": "Anwältinnen", "n": "Anwaltschaft" },
           "flags": "g"
         },
         {
@@ -52,7 +52,7 @@
           "description": "Köch*innen → Köche/Köchinnen",
           "example": "Köch:innen",
           "pattern": "\\b(Köch)[*:_]innen\\b",
-          "replacement": { "m": "Köche", "w": "Köchinnen", "g": "Köche", "n": "Kochpersonal" },
+          "replacement": { "b": "Köche und Köchinnen", "m": "Köche", "w": "Köchinnen", "n": "Kochpersonal" },
           "flags": "g"
         },
         {
@@ -60,7 +60,7 @@
           "description": "Kleinschreibung: wörter auf *innen/:innen/_innen",
           "example": "lehrer:innen",
           "pattern": "\\b([a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]innen\\b",
-          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "replacement": { "b": "$1 und $1innen", "m": "$1", "w": "$1innen", "n": "$1" },
           "flags": "g"
         },
         {
@@ -68,7 +68,7 @@
           "description": "Singular ohne -e: Lehrer*in → Lehrer/Lehrerin",
           "example": "Lehrer:in",
           "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]*(?:er|ler|ner|ger|ber|der|fer|ter|wer|mer))[*:_]in\\b",
-          "replacement": { "m": "$1", "w": "$1in", "g": "$1", "n": "$1" },
+          "replacement": { "b": "$1 oder $1in", "m": "$1", "w": "$1in", "n": "$1" },
           "flags": "g"
         },
         {
@@ -76,7 +76,7 @@
           "description": "Singular: Kund*in/:in/_in → Kunde/Kundin",
           "example": "Kund:in",
           "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]in\\b",
-          "replacement": { "m": "$1e", "w": "$1in", "g": "$1e", "n": "$1e" },
+          "replacement": { "b": "$1e oder $1in", "m": "$1e", "w": "$1in", "n": "$1e" },
           "flags": "g"
         },
         {
@@ -84,7 +84,7 @@
           "description": "Singular Kleinschreibung ohne -e: lehrer:in → lehrer/lehrerin",
           "example": "lehrer:in",
           "pattern": "\\b([a-zäöüß]+(?:er|ler|ner|ger|ber|der|fer|ter|wer|mer))[*:_]in\\b",
-          "replacement": { "m": "$1", "w": "$1in", "g": "$1", "n": "$1" },
+          "replacement": { "b": "$1 oder $1in", "m": "$1", "w": "$1in", "n": "$1" },
           "flags": "g"
         },
         {
@@ -92,7 +92,7 @@
           "description": "Singular Kleinschreibung",
           "example": "expert:in",
           "pattern": "\\b([a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg|ner|ler|zer|ger|ber|der|fer|ter|wer|mer|ner))[*:_]in\\b",
-          "replacement": { "m": "$1e", "w": "$1in", "g": "$1e", "n": "$1e" },
+          "replacement": { "b": "$1e oder $1in", "m": "$1e", "w": "$1in", "n": "$1e" },
           "flags": "g"
         }
       ]
@@ -106,7 +106,7 @@
           "description": "MitarbeiterInnen → Mitarbeiter/Mitarbeiterinnen",
           "example": "MitarbeiterInnen",
           "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg))Innen\\b",
-          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "replacement": { "b": "$1 und $1innen", "m": "$1", "w": "$1innen", "n": "$1" },
           "flags": "g"
         },
         {
@@ -114,7 +114,7 @@
           "description": "MitarbeiterIn → Mitarbeiter/Mitarbeiterin",
           "example": "MitarbeiterIn",
           "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ling|ier|ar|oge|oph|ot|urg))In\\b",
-          "replacement": { "m": "$1", "w": "$1in", "g": "$1", "n": "$1" },
+          "replacement": { "b": "$1 oder $1in", "m": "$1", "w": "$1in", "n": "$1" },
           "flags": "g"
         }
       ]
@@ -128,7 +128,7 @@
           "description": "Expert*innen → Experten/Expertinnen",
           "example": "Expert:innen",
           "pattern": "\\bExpert[*:_]innen\\b",
-          "replacement": { "m": "Experten", "w": "Expertinnen", "g": "Experten", "n": "Fachleute" },
+          "replacement": { "b": "Experten und Expertinnen", "m": "Experten", "w": "Expertinnen", "n": "Fachleute" },
           "flags": "g"
         },
         {
@@ -136,7 +136,7 @@
           "description": "Expert*in → Experte/Expertin",
           "example": "Expert:in",
           "pattern": "\\bExpert[*:_]in\\b",
-          "replacement": { "m": "Experte", "w": "Expertin", "g": "Experte", "n": "Fachperson" },
+          "replacement": { "b": "Experte oder Expertin", "m": "Experte", "w": "Expertin", "n": "Fachperson" },
           "flags": "g"
         },
         {
@@ -144,7 +144,7 @@
           "description": "Kolleg*innen → Kollegen/Kolleginnen",
           "example": "Kolleg:innen",
           "pattern": "\\bKolleg[*:_]innen\\b",
-          "replacement": { "m": "Kollegen", "w": "Kolleginnen", "g": "Kollegen", "n": "Kollegium" },
+          "replacement": { "b": "Kollegen und Kolleginnen", "m": "Kollegen", "w": "Kolleginnen", "n": "Kollegium" },
           "flags": "g"
         },
         {
@@ -152,7 +152,7 @@
           "description": "Kolleg*in → Kollege/Kollegin",
           "example": "Kolleg:in",
           "pattern": "\\bKolleg[*:_]in\\b",
-          "replacement": { "m": "Kollege", "w": "Kollegin", "g": "Kollege", "n": "Kollegiumsmitglied" },
+          "replacement": { "b": "Kollege oder Kollegin", "m": "Kollege", "w": "Kollegin", "n": "Kollegiumsmitglied" },
           "flags": "g"
         },
         {
@@ -160,7 +160,7 @@
           "description": "Bürger*innen → Bürger/Bürgerinnen",
           "example": "Bürger:innen",
           "pattern": "\\bBürger[*:_]innen\\b",
-          "replacement": { "m": "Bürger", "w": "Bürgerinnen", "g": "Bürger", "n": "Bevölkerung" },
+          "replacement": { "b": "Bürger und Bürgerinnen", "m": "Bürger", "w": "Bürgerinnen", "n": "Bevölkerung" },
           "flags": "g"
         },
         {
@@ -168,7 +168,7 @@
           "description": "Freund*innen → Freunde/Freundinnen",
           "example": "Freund:innen",
           "pattern": "\\bFreund[*:_]innen\\b",
-          "replacement": { "m": "Freunde", "w": "Freundinnen", "g": "Freunde", "n": "Freundeskreis" },
+          "replacement": { "b": "Freunde und Freundinnen", "m": "Freunde", "w": "Freundinnen", "n": "Freundeskreis" },
           "flags": "g"
         },
         {
@@ -176,7 +176,7 @@
           "description": "Kund*innen → Kunden/Kundinnen",
           "example": "Kund:innen",
           "pattern": "\\bKund[*:_]innen\\b",
-          "replacement": { "m": "Kunden", "w": "Kundinnen", "g": "Kunden", "n": "Kundschaft" },
+          "replacement": { "b": "Kunden und Kundinnen", "m": "Kunden", "w": "Kundinnen", "n": "Kundschaft" },
           "flags": "g"
         },
         {
@@ -184,7 +184,7 @@
           "description": "Kund*in → Kunde/Kundin",
           "example": "Kund:in",
           "pattern": "\\bKund[*:_]in\\b",
-          "replacement": { "m": "Kunde", "w": "Kundin", "g": "Kunde", "n": "Kundschaft" },
+          "replacement": { "b": "Kunde oder Kundin", "m": "Kunde", "w": "Kundin", "n": "Kundschaft" },
           "flags": "g"
         },
         {
@@ -192,7 +192,7 @@
           "description": "Patient*innen → Patienten/Patientinnen",
           "example": "Patient:innen",
           "pattern": "\\bPatient[*:_]innen\\b",
-          "replacement": { "m": "Patienten", "w": "Patientinnen", "g": "Patienten", "n": "Erkrankte" },
+          "replacement": { "b": "Patienten und Patientinnen", "m": "Patienten", "w": "Patientinnen", "n": "Erkrankte" },
           "flags": "g"
         },
         {
@@ -200,7 +200,7 @@
           "description": "Patient*in → Patient/Patientin",
           "example": "Patient:in",
           "pattern": "\\bPatient[*:_]in\\b",
-          "replacement": { "m": "Patient", "w": "Patientin", "g": "Patient", "n": "Erkrankte Person" },
+          "replacement": { "b": "Patient oder Patientin", "m": "Patient", "w": "Patientin", "n": "Erkrankte Person" },
           "flags": "g"
         },
         {
@@ -208,7 +208,7 @@
           "description": "Autor*innen → Autoren/Autorinnen",
           "example": "Autor:innen",
           "pattern": "\\bAutor[*:_]innen\\b",
-          "replacement": { "m": "Autoren", "w": "Autorinnen", "g": "Autoren", "n": "Verfassende" },
+          "replacement": { "b": "Autoren und Autorinnen", "m": "Autoren", "w": "Autorinnen", "n": "Verfassende" },
           "flags": "g"
         },
         {
@@ -216,7 +216,7 @@
           "description": "Partner*innen → Partner/Partnerinnen",
           "example": "Partner:innen",
           "pattern": "\\bPartner[*:_]innen\\b",
-          "replacement": { "m": "Partner", "w": "Partnerinnen", "g": "Partner", "n": "Partnerschaft" },
+          "replacement": { "b": "Partner und Partnerinnen", "m": "Partner", "w": "Partnerinnen", "n": "Partnerschaft" },
           "flags": "g"
         },
         {
@@ -224,7 +224,7 @@
           "description": "Chef*innen → Chefs/Chefinnen",
           "example": "Chef:innen",
           "pattern": "\\bChef[*:_]innen\\b",
-          "replacement": { "m": "Chefs", "w": "Chefinnen", "g": "Chefs", "n": "Vorgesetzte" },
+          "replacement": { "b": "Chefs und Chefinnen", "m": "Chefs", "w": "Chefinnen", "n": "Vorgesetzte" },
           "flags": "g"
         }
       ]
@@ -238,7 +238,7 @@
           "description": "der*die / der:die → der/die",
           "example": "der:die",
           "pattern": "\\bder[*:_]die\\b",
-          "replacement": { "m": "der", "w": "die", "g": "der", "n": "die/der" },
+          "replacement": { "b": "der oder die", "m": "der", "w": "die", "n": "die/der" },
           "flags": "gi"
         },
         {
@@ -246,7 +246,7 @@
           "description": "die*der → der/die",
           "example": "die:der",
           "pattern": "\\bdie[*:_]der\\b",
-          "replacement": { "m": "der", "w": "die", "g": "der", "n": "die/der" },
+          "replacement": { "b": "der oder die", "m": "der", "w": "die", "n": "die/der" },
           "flags": "gi"
         },
         {
@@ -254,7 +254,7 @@
           "description": "ein*e / ein:e → ein/eine",
           "example": "ein:e",
           "pattern": "\\bein[*:_]e\\b",
-          "replacement": { "m": "ein", "w": "eine", "g": "ein", "n": "eine" },
+          "replacement": { "b": "ein oder eine", "m": "ein", "w": "eine", "n": "eine" },
           "flags": "gi"
         },
         {
@@ -262,7 +262,7 @@
           "description": "jede*r / jede:r → jeder/jede",
           "example": "jede:r",
           "pattern": "\\bjede[*:_]r\\b",
-          "replacement": { "m": "jeder", "w": "jede", "g": "jeder", "n": "alle" },
+          "replacement": { "b": "jeder und jede", "m": "jeder", "w": "jede", "n": "alle" },
           "flags": "gi"
         },
         {
@@ -270,7 +270,7 @@
           "description": "jeder*jede → jeder/jede",
           "example": "jeder:jede",
           "pattern": "\\bjeder[*:_]jede\\b",
-          "replacement": { "m": "jeder", "w": "jede", "g": "jeder", "n": "alle" },
+          "replacement": { "b": "jeder und jede", "m": "jeder", "w": "jede", "n": "alle" },
           "flags": "gi"
         },
         {
@@ -278,7 +278,7 @@
           "description": "keine*r / keine:r → keiner/keine",
           "example": "keine:r",
           "pattern": "\\bkeine[*:_]r\\b",
-          "replacement": { "m": "keiner", "w": "keine", "g": "keiner", "n": "niemand" },
+          "replacement": { "b": "keiner und keine", "m": "keiner", "w": "keine", "n": "niemand" },
           "flags": "gi"
         },
         {
@@ -286,7 +286,7 @@
           "description": "seine*ihre → seine/ihre",
           "example": "seine:ihre",
           "pattern": "\\bseine?[*:_]ihre?\\b",
-          "replacement": { "m": "seine", "w": "ihre", "g": "seine", "n": "deren" },
+          "replacement": { "b": "seine oder ihre", "m": "seine", "w": "ihre", "n": "deren" },
           "flags": "gi"
         },
         {
@@ -294,7 +294,7 @@
           "description": "er*sie → er/sie",
           "example": "er:sie",
           "pattern": "\\ber[*:_]sie\\b",
-          "replacement": { "m": "er", "w": "sie", "g": "er", "n": "die Person" },
+          "replacement": { "b": "er oder sie", "m": "er", "w": "sie", "n": "die Person" },
           "flags": "gi"
         },
         {
@@ -302,7 +302,7 @@
           "description": "ihm*ihr → ihm/ihr",
           "example": "ihm:ihr",
           "pattern": "\\bihm[*:_]ihr\\b",
-          "replacement": { "m": "ihm", "w": "ihr", "g": "ihm", "n": "der Person" },
+          "replacement": { "b": "ihm oder ihr", "m": "ihm", "w": "ihr", "n": "der Person" },
           "flags": "gi"
         },
         {
@@ -310,7 +310,7 @@
           "description": "dem*der (Dativ) → dem/der",
           "example": "dem:der",
           "pattern": "\\bdem[*:_]der\\b",
-          "replacement": { "m": "dem", "w": "der", "g": "dem", "n": "dem/der" },
+          "replacement": { "b": "dem oder der", "m": "dem", "w": "der", "n": "dem/der" },
           "flags": "gi"
         },
         {
@@ -318,7 +318,7 @@
           "description": "den*die (Akkusativ) → den/die",
           "example": "den:die",
           "pattern": "\\bden[*:_]die\\b",
-          "replacement": { "m": "den", "w": "die", "g": "den", "n": "den/die" },
+          "replacement": { "b": "den oder die", "m": "den", "w": "die", "n": "den/die" },
           "flags": "gi"
         }
       ]
@@ -332,7 +332,7 @@
           "description": "Bürgerinnen und Bürger → Bürger/Bürgerinnen",
           "example": "Bürgerinnen und Bürger",
           "pattern": "\\bBürgerinnen und Bürger\\b",
-          "replacement": { "m": "Bürger", "w": "Bürgerinnen", "g": "Bürger", "n": "Bevölkerung" },
+          "replacement": { "b": "Bürger und Bürgerinnen", "m": "Bürger", "w": "Bürgerinnen", "n": "Bevölkerung" },
           "flags": "g"
         },
         {
@@ -340,7 +340,7 @@
           "description": "Bürger und Bürgerinnen → Bürger/Bürgerinnen",
           "example": "Bürger und Bürgerinnen",
           "pattern": "\\bBürger und Bürgerinnen\\b",
-          "replacement": { "m": "Bürger", "w": "Bürgerinnen", "g": "Bürger", "n": "Bevölkerung" },
+          "replacement": { "b": "Bürger und Bürgerinnen", "m": "Bürger", "w": "Bürgerinnen", "n": "Bevölkerung" },
           "flags": "g"
         },
         {
@@ -348,7 +348,7 @@
           "description": "Schülerinnen und Schüler → Schüler/Schülerinnen",
           "example": "Schülerinnen und Schüler",
           "pattern": "\\bSchülerinnen und Schüler\\b",
-          "replacement": { "m": "Schüler", "w": "Schülerinnen", "g": "Schüler", "n": "Lernende" },
+          "replacement": { "b": "Schüler und Schülerinnen", "m": "Schüler", "w": "Schülerinnen", "n": "Lernende" },
           "flags": "g"
         },
         {
@@ -356,7 +356,7 @@
           "description": "Ärztinnen und Ärzte → Ärzte/Ärztinnen",
           "example": "Ärztinnen und Ärzte",
           "pattern": "\\bÄrztinnen und Ärzte\\b",
-          "replacement": { "m": "Ärzte", "w": "Ärztinnen", "g": "Ärzte", "n": "Ärzteschaft" },
+          "replacement": { "b": "Ärzte und Ärztinnen", "m": "Ärzte", "w": "Ärztinnen", "n": "Ärzteschaft" },
           "flags": "g"
         },
         {
@@ -364,7 +364,7 @@
           "description": "Kolleginnen und Kollegen → Kollegen/Kolleginnen",
           "example": "Kolleginnen und Kollegen",
           "pattern": "\\bKolleginnen und Kollegen\\b",
-          "replacement": { "m": "Kollegen", "w": "Kolleginnen", "g": "Kollegen", "n": "Kollegium" },
+          "replacement": { "b": "Kollegen und Kolleginnen", "m": "Kollegen", "w": "Kolleginnen", "n": "Kollegium" },
           "flags": "g"
         },
         {
@@ -372,7 +372,7 @@
           "description": "Freundinnen und Freunde → Freunde/Freundinnen",
           "example": "Freundinnen und Freunde",
           "pattern": "\\bFreundinnen und Freunde\\b",
-          "replacement": { "m": "Freunde", "w": "Freundinnen", "g": "Freunde", "n": "Freundeskreis" },
+          "replacement": { "b": "Freunde und Freundinnen", "m": "Freunde", "w": "Freundinnen", "n": "Freundeskreis" },
           "flags": "g"
         },
         {
@@ -380,7 +380,7 @@
           "description": "Lehrerinnen und Lehrer → Lehrer/Lehrerinnen",
           "example": "Lehrerinnen und Lehrer",
           "pattern": "\\bLehrerinnen und Lehrer\\b",
-          "replacement": { "m": "Lehrer", "w": "Lehrerinnen", "g": "Lehrer", "n": "Lehrkräfte" },
+          "replacement": { "b": "Lehrer und Lehrerinnen", "m": "Lehrer", "w": "Lehrerinnen", "n": "Lehrkräfte" },
           "flags": "g"
         },
         {
@@ -388,7 +388,7 @@
           "description": "Xinnen und X → X (m) oder Xinnen (w)",
           "example": "Partnerinnen und Partner",
           "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|ent|ant|ist|at|ekt|eur|ör|ier|ar))innen und \\1\\b",
-          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "replacement": { "b": "$1 und $1innen", "m": "$1", "w": "$1innen", "n": "$1" },
           "flags": "g"
         },
         {
@@ -396,7 +396,7 @@
           "description": "X und Xinnen → X (m) oder Xinnen (w)",
           "example": "Partner und Partnerinnen",
           "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|ent|ant|ist|at|ekt|eur|ör|ier|ar)) und \\1innen\\b",
-          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "replacement": { "b": "$1 und $1innen", "m": "$1", "w": "$1innen", "n": "$1" },
           "flags": "g"
         },
         {
@@ -404,7 +404,7 @@
           "description": "er oder sie / sie oder er → er/sie",
           "example": "er oder sie",
           "pattern": "\\b(er|sie) oder (sie|er)\\b",
-          "replacement": { "m": "er", "w": "sie", "g": "er", "n": "die Person" },
+          "replacement": { "b": "er oder sie", "m": "er", "w": "sie", "n": "die Person" },
           "flags": "gi"
         }
       ]
@@ -418,7 +418,7 @@
           "description": "Studierende → Studenten/Studentinnen",
           "example": "Studierende",
           "pattern": "\\bStudierende\\b",
-          "replacement": { "m": "Studenten", "w": "Studentinnen", "g": "Studenten", "n": "Studierende" },
+          "replacement": { "b": "Studenten und Studentinnen", "m": "Studenten", "w": "Studentinnen", "n": "Studierende" },
           "flags": "g"
         },
         {
@@ -426,7 +426,7 @@
           "description": "Studierender → Student/Studentin",
           "example": "Studierender",
           "pattern": "\\bStudierender\\b",
-          "replacement": { "m": "Student", "w": "Studentin", "g": "Student", "n": "Studierende Person" },
+          "replacement": { "b": "Student oder Studentin", "m": "Student", "w": "Studentin", "n": "Studierende Person" },
           "flags": "g"
         },
         {
@@ -434,7 +434,7 @@
           "description": "Lehrende → Lehrer/Lehrerinnen",
           "example": "Lehrende",
           "pattern": "\\bLehrende\\b",
-          "replacement": { "m": "Lehrer", "w": "Lehrerinnen", "g": "Lehrer", "n": "Lehrkräfte" },
+          "replacement": { "b": "Lehrer und Lehrerinnen", "m": "Lehrer", "w": "Lehrerinnen", "n": "Lehrkräfte" },
           "flags": "g"
         },
         {
@@ -442,7 +442,7 @@
           "description": "Mitarbeitende → Mitarbeiter/Mitarbeiterinnen",
           "example": "Mitarbeitende",
           "pattern": "\\bMitarbeitende\\b",
-          "replacement": { "m": "Mitarbeiter", "w": "Mitarbeiterinnen", "g": "Mitarbeiter", "n": "Belegschaft" },
+          "replacement": { "b": "Mitarbeiter und Mitarbeiterinnen", "m": "Mitarbeiter", "w": "Mitarbeiterinnen", "n": "Belegschaft" },
           "flags": "g"
         },
         {
@@ -450,7 +450,7 @@
           "description": "Forschende → Forscher/Forscherinnen",
           "example": "Forschende",
           "pattern": "\\bForschende\\b",
-          "replacement": { "m": "Forscher", "w": "Forscherinnen", "g": "Forscher", "n": "Forschende" },
+          "replacement": { "b": "Forscher und Forscherinnen", "m": "Forscher", "w": "Forscherinnen", "n": "Forschende" },
           "flags": "g"
         },
         {
@@ -458,7 +458,7 @@
           "description": "Teilnehmende → Teilnehmer/Teilnehmerinnen",
           "example": "Teilnehmende",
           "pattern": "\\bTeilnehmende\\b",
-          "replacement": { "m": "Teilnehmer", "w": "Teilnehmerinnen", "g": "Teilnehmer", "n": "Teilnehmende" },
+          "replacement": { "b": "Teilnehmer und Teilnehmerinnen", "m": "Teilnehmer", "w": "Teilnehmerinnen", "n": "Teilnehmende" },
           "flags": "g"
         },
         {
@@ -466,7 +466,7 @@
           "description": "Arbeitnehmende → Arbeitnehmer/Arbeitnehmerinnen",
           "example": "Arbeitnehmende",
           "pattern": "\\bArbeitnehmende\\b",
-          "replacement": { "m": "Arbeitnehmer", "w": "Arbeitnehmerinnen", "g": "Arbeitnehmer", "n": "Beschäftigte" },
+          "replacement": { "b": "Arbeitnehmer und Arbeitnehmerinnen", "m": "Arbeitnehmer", "w": "Arbeitnehmerinnen", "n": "Beschäftigte" },
           "flags": "g"
         },
         {
@@ -474,7 +474,7 @@
           "description": "Arbeitgebende → Arbeitgeber/Arbeitgeberinnen",
           "example": "Arbeitgebende",
           "pattern": "\\bArbeitgebende\\b",
-          "replacement": { "m": "Arbeitgeber", "w": "Arbeitgeberinnen", "g": "Arbeitgeber", "n": "Unternehmen" },
+          "replacement": { "b": "Arbeitgeber und Arbeitgeberinnen", "m": "Arbeitgeber", "w": "Arbeitgeberinnen", "n": "Unternehmen" },
           "flags": "g"
         },
         {
@@ -482,7 +482,7 @@
           "description": "Suchende → Suchende/Interessenten",
           "example": "Suchende",
           "pattern": "\\bSuchende\\b",
-          "replacement": { "m": "Interessenten", "w": "Interessentinnen", "g": "Interessenten", "n": "Suchende" },
+          "replacement": { "b": "Interessenten und Interessentinnen", "m": "Interessenten", "w": "Interessentinnen", "n": "Suchende" },
           "flags": "g"
         },
         {
@@ -490,7 +490,7 @@
           "description": "Suchender → Interessent/Interessentin",
           "example": "Suchender",
           "pattern": "\\bSuchender\\b",
-          "replacement": { "m": "Interessent", "w": "Interessentin", "g": "Interessent", "n": "Suchende Person" },
+          "replacement": { "b": "Interessent oder Interessentin", "m": "Interessent", "w": "Interessentin", "n": "Suchende Person" },
           "flags": "g"
         },
         {
@@ -498,7 +498,7 @@
           "description": "Bewerbende → Bewerber/Bewerberinnen",
           "example": "Bewerbende",
           "pattern": "\\bBewerbende\\b",
-          "replacement": { "m": "Bewerber", "w": "Bewerberinnen", "g": "Bewerber", "n": "Bewerbende" },
+          "replacement": { "b": "Bewerber und Bewerberinnen", "m": "Bewerber", "w": "Bewerberinnen", "n": "Bewerbende" },
           "flags": "g"
         },
         {
@@ -506,7 +506,7 @@
           "description": "Vermietende → Vermieter/Vermieterinnen",
           "example": "Vermietende",
           "pattern": "\\bVermietende\\b",
-          "replacement": { "m": "Vermieter", "w": "Vermieterinnen", "g": "Vermieter", "n": "Vermietende" },
+          "replacement": { "b": "Vermieter und Vermieterinnen", "m": "Vermieter", "w": "Vermieterinnen", "n": "Vermietende" },
           "flags": "g"
         },
         {
@@ -514,7 +514,7 @@
           "description": "Anbietende → Anbieter/Anbieterinnen",
           "example": "Anbietende",
           "pattern": "\\bAnbietende\\b",
-          "replacement": { "m": "Anbieter", "w": "Anbieterinnen", "g": "Anbieter", "n": "Anbietende" },
+          "replacement": { "b": "Anbieter und Anbieterinnen", "m": "Anbieter", "w": "Anbieterinnen", "n": "Anbietende" },
           "flags": "g"
         },
         {
@@ -522,7 +522,7 @@
           "description": "Nutzende → Nutzer/Nutzerinnen",
           "example": "Nutzende",
           "pattern": "\\bNutzende\\b",
-          "replacement": { "m": "Nutzer", "w": "Nutzerinnen", "g": "Nutzer", "n": "Nutzende" },
+          "replacement": { "b": "Nutzer und Nutzerinnen", "m": "Nutzer", "w": "Nutzerinnen", "n": "Nutzende" },
           "flags": "g"
         }
       ]
@@ -536,7 +536,7 @@
           "description": "Lehrer/innen, Lehrer/-innen → Lehrer/Lehrerinnen",
           "example": "Lehrer/innen",
           "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ier|ar))\\/?-?innen\\b",
-          "replacement": { "m": "$1", "w": "$1innen", "g": "$1", "n": "$1" },
+          "replacement": { "b": "$1 und $1innen", "m": "$1", "w": "$1innen", "n": "$1" },
           "flags": "g"
         },
         {
@@ -544,7 +544,7 @@
           "description": "Lehrer/in, Lehrer/-in → Lehrer/Lehrerin",
           "example": "Lehrer/-in",
           "pattern": "\\b([A-ZÄÖÜ][a-zäöüß]+(?:er|el|en|ent|ant|ist|at|ekt|eur|ör|ier|ar))\\/?-?in\\b",
-          "replacement": { "m": "$1", "w": "$1in", "g": "$1", "n": "$1" },
+          "replacement": { "b": "$1 oder $1in", "m": "$1", "w": "$1in", "n": "$1" },
           "flags": "g"
         }
       ]

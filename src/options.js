@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ─── Load all data ────────────────────────────────────────────────────────
 
   const settings = await chrome.storage.sync.get({
-    gender: 'g',
+    gender: 'b',
     partizip: false,
     doppelformen: true,
     categories: {},
@@ -146,9 +146,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         tr.innerHTML = `
           <td class="col-example">${escHtml(rule.example || rule.pattern.substring(0, 20))}</td>
           <td class="col-desc">${escHtml(rule.description)}</td>
+          <td class="col-preset">${escHtml(rule.replacement.b || '')}</td>
           <td class="col-preset">${escHtml(rule.replacement.m || '')}</td>
           <td class="col-preset">${escHtml(rule.replacement.w || '')}</td>
-          <td class="col-preset">${escHtml(rule.replacement.g || '')}</td>
           <td class="col-preset">${escHtml(rule.replacement.n || '')}</td>
           <td class="col-custom">
             <input type="text" data-rule-id="${rule.id}" value="${escAttr(customVal)}"
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.getElementById('btnExport').addEventListener('click', async () => {
     const sync = await chrome.storage.sync.get({
-      gender: 'g',
+      gender: 'b',
       categories: {},
       customReplacements: {},
       customRules: [],
@@ -347,9 +347,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div>
           <code>${escHtml(rule.pattern)}</code>
           <span style="margin-left: 8px; color: #888;">${escHtml(rule.description || '')}</span><br>
-          <span style="color: #4A90D9;">m:</span> ${escHtml(rule.m || '—')}
+          <span style="color: #4A90D9;">b:</span> ${escHtml(rule.b || '—')}
+          <span style="margin-left: 6px; color: #888;">m:</span> ${escHtml(rule.m || '—')}
           <span style="margin-left: 6px; color: #e5a;">w:</span> ${escHtml(rule.w || '—')}
-          <span style="margin-left: 6px; color: #888;">g:</span> ${escHtml(rule.g || '—')}
           <span style="margin-left: 6px; color: #6a8;">n:</span> ${escHtml(rule.n || '—')}
         </div>
         <button style="color: #c44;">Entfernen</button>
@@ -370,22 +370,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('addRule').addEventListener('click', async () => {
     const pattern = document.getElementById('rulePattern').value.trim();
     const desc = document.getElementById('ruleDesc').value.trim();
+    const b = document.getElementById('ruleBoth').value.trim();
     const m = document.getElementById('ruleMale').value.trim();
     const w = document.getElementById('ruleFemale').value.trim();
-    const g = document.getElementById('ruleGeneric').value.trim();
     const n = document.getElementById('ruleNeutral').value.trim();
 
-    if (!pattern || (!m && !w && !g && !n)) return;
+    if (!pattern || (!b && !m && !w && !n)) return;
 
     try { new RegExp(pattern, 'g'); }
     catch { alert('Ungültiger regulärer Ausdruck!'); return; }
 
     const current = await chrome.storage.sync.get({ customRules: [] });
-    current.customRules.push({ pattern, description: desc, m, w, g, n });
+    current.customRules.push({ pattern, description: desc, b, m, w, n });
     await chrome.storage.sync.set({ customRules: current.customRules });
     renderCustomRules(current.customRules);
 
-    ['rulePattern', 'ruleDesc', 'ruleMale', 'ruleFemale', 'ruleGeneric', 'ruleNeutral']
+    ['rulePattern', 'ruleDesc', 'ruleBoth', 'ruleMale', 'ruleFemale', 'ruleNeutral']
       .forEach((id) => { document.getElementById(id).value = ''; });
     showToast();
   });

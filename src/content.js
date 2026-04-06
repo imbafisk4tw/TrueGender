@@ -14,7 +14,7 @@
 
   let settings = {
     enabled: true,
-    gender: 'g',        // m | w | g | n | c
+    gender: 'b',        // b | m | w | n | c
     partizip: true,
     doppelformen: true,
     categories: {},      // per-category overrides
@@ -78,7 +78,7 @@
           compiledRules.push({
             id: 'custom-' + rule.pattern,
             regex,
-            replacement: { m: rule.m, w: rule.w, g: rule.g, n: rule.n || rule.g, c: rule.c || '' },
+            replacement: { b: rule.b || rule.m, m: rule.m, w: rule.w, n: rule.n || rule.b || rule.m, c: rule.c || '' },
           });
         } catch (e) {
           console.warn('[TrueGender] Invalid custom rule:', rule.pattern, e);
@@ -96,11 +96,11 @@
     if (gender === 'c') {
       const custom = settings.customReplacements[rule.id];
       if (custom !== undefined && custom !== '') return custom;
-      // Fall back to generic masculine
-      return rule.replacement.g;
+      // Fall back to both forms
+      return rule.replacement.b;
     }
 
-    return rule.replacement[gender] || rule.replacement.g;
+    return rule.replacement[gender] || rule.replacement.b;
   }
 
   function replaceText(text) {
@@ -355,7 +355,7 @@
   async function init() {
     const stored = await chrome.storage.sync.get({
       enabled: true,
-      gender: 'g',
+      gender: 'b',
       partizip: true,
       doppelformen: true,
       categories: {},
